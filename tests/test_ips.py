@@ -12,6 +12,7 @@ matched_ips = [ip_address(i) for i in [
     '20.37.64.123', '2603:1000:4:402::179',  # Azure
     '8.8.8.8', '2600:1901::1234',            # Google
     '131.0.72.1', '2405:8100::1234',         # CloudFlare
+    '185.31.16.1', '2a04:4e40::1234',        # Fastly
 ]]
 unmatched_ips = [ip_address(i) for i in [
     '1.1.1.1',

@@ -10,6 +10,7 @@ published IPv4 and IPv6 address ranges. Currently it can recognize…
 * Azure
 * Google
 * CloudFlare
+* Fastly
 
 ## Install
 
