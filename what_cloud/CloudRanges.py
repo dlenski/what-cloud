@@ -14,7 +14,9 @@ class CloudRanges:
         return logging.getLogger(#((__module__ + '.') if __module__ else '') +
             self.__class__.__name__)
     def _cached(self, fn=None):
-        return os.path.join(os.path.dirname(__file__), 'cache', fn)
+        d = os.path.join(os.path.expanduser('~'), '.what-cloud-cache')
+        os.makedirs(d, exist_ok=True)
+        return os.path.join(d, fn)
     def load(fp=None):
         pass
     def save(fp=None):

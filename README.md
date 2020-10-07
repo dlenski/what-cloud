@@ -1,10 +1,10 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://api.travis-ci.org/dlenski/what-cloud.png)](https://travis-ci.org/dlenski/what-cloud)
-[![PyPI](https://img.shields.io/pypi/v/what-cloud.svg)](https://pypi.python.org/pypi/what-cloud)
+[![Build Status](https://api.travis-ci.org/dlenski/what-cloud.png)](https://travis-ci.com/github/dlenski/what-cloud)
 
 # what-cloud
 
-Identifies servers running in various public clouds. Currently it can recognize…
+Identifies servers running in various public clouds, based on their providers'
+published IPv4 and IPv6 address ranges. Currently it can recognize…
 
 * AWS
 * Azure
@@ -13,7 +13,7 @@ Identifies servers running in various public clouds. Currently it can recognize�
 
 ## Install
 
-Requires Python 3, `pip`, and [`requests`](https://docs.python-requests.org):
+Requires Python 3.6+, `pip`, and [`requests`](https://docs.python-requests.org):
 
 ```sh
 $ pip3 install https://github.com/dlenski/what-cloud/archive/master.zip
