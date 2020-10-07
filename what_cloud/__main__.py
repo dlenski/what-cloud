@@ -8,9 +8,7 @@ import os
 from itertools import chain
 from pprint import pprint
 
-from .aws import AWSCloud
-from .azure import AzureCloud
-from .google import GoogleCloud
+from . import all_clouds
 
 logging.basicConfig(level=logging.INFO)
 
@@ -23,11 +21,8 @@ def main():
 
     session = requests.session()
 
-    clouds = dict(
-        AWS = AWSCloud(session=session),
-        Azure = AzureCloud(session=session),
-        Google = GoogleCloud(session=session),
-    )
+    session = requests.session()
+    clouds = {n:c(session=session) for n,c in all_clouds.items()}
 
     for ip in args.ip:
         matched = False
