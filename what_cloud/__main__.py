@@ -20,8 +20,6 @@ def main():
     args = p.parse_args()
 
     session = requests.session()
-
-    session = requests.session()
     clouds = {n:c(session=session) for n,c in all_clouds.items()}
 
     for ip in args.ip:

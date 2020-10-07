@@ -8,9 +8,10 @@ session = requests.session()
 clouds = {n:c(session=session) for n,c in all_clouds.items()}
 
 matched_ips = [ip_address(i) for i in [
-    '208.86.91.234',               # AWS
-    '20.37.64.123', '51.4.144.99', # Azure
-    '2600:1901::1234', '8.8.8.8',  # Google
+    '208.86.91.234', '2a05:d07a:a000::1234', # AWS
+    '20.37.64.123', '2603:1000:4:402::179',  # Azure
+    '8.8.8.8', '2600:1901::1234',            # Google
+    '131.0.72.1', '2405:8100::1234',         # CloudFlare
 ]]
 unmatched_ips = [ip_address(i) for i in [
     '1.1.1.1',

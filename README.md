@@ -9,6 +9,7 @@ Identifies servers running in various public clouds. Currently it can recognizeâ
 * AWS
 * Azure
 * Google
+* CloudFlare
 
 ## Install
 
