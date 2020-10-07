@@ -6,16 +6,19 @@ from .CloudRanges import CloudRanges
 
 # https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html#aws-ip-syntax
 class AWSCloud(CloudRanges):
+    def download(self, fp):
+        url = 'https://ip-ranges.amazonaws.com/ip-ranges.json'
+        self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
+        fp.write(self.session.get(url).text)
+
     def load(self, fp=None):
         if not fp:
             fn = self._cached('aws-ip-ranges.json')
             try:
                 fp = open(fn)
             except FileNotFoundError:
-                url = 'https://ip-ranges.amazonaws.com/ip-ranges.json'
-                self._logger.info('Downloading {} to {} ...'.format(url, fn))
                 fp = open(fn, 'x+')
-                fp.write(self.session.get(url).text)
+                self.download(fp)
                 fp.flush()
                 fp.seek(0)
 
