@@ -8,6 +8,7 @@ Identifies servers running in various public clouds. Currently it can recognizeâ
 
 * AWS
 * Azure
+* Google
 
 ## Install
 
@@ -32,27 +33,40 @@ optional arguments:
 
 ```
 $ what_cloud 208.86.91.234
-IP address 208.86.91.234 belongs to AWS cloud:
+IP address 208.86.91.234 belongs to cloud provider AWS:
 	{'ip_prefix': IPv4Network('208.86.90.0/23'), 'region': 'eu-west-1', 'service': 'AMAZON', 'network_border_group': 'eu-west-1'}
 	{'ip_prefix': IPv4Network('208.86.90.0/23'), 'region': 'eu-west-1', 'service': 'EC2', 'network_border_group': 'eu-west-1'}
 ```
 
 ```
 $ what_cloud 20.37.64.123 51.4.144.99
-IP address 20.37.64.123 belongs to Azure cloud:
+IP address 20.37.64.123 belongs to cloud provider Azure:
 	{'changeNumber': 111, 'cloud': 'Public', 'values': [{'name': 'PowerBI', 'id': 'PowerBI', 'properties': {'changeNumber': 3, 'region': '', 'regionId': 0, 'platform': 'Azure', 'systemService': 'PowerBI', 'addressPrefixes': [IPv4Network('20.37.64.122/31')], 'networkFeatures': ['NSG', 'UDR', 'FW']}}]}
 	{'changeNumber': 111, 'cloud': 'Public', 'values': [{'name': 'AzureCloud.uaecentral', 'id': 'AzureCloud.uaecentral', 'properties': {'changeNumber': 8, 'region': 'uaecentral', 'regionId': 61, 'platform': 'Azure', 'systemService': '', 'addressPrefixes': [IPv4Network('20.37.64.0/19')], 'networkFeatures': ['API', 'NSG']}}]}
 	{'changeNumber': 111, 'cloud': 'Public', 'values': [{'name': 'AzureCloud', 'id': 'AzureCloud', 'properties': {'changeNumber': 48, 'region': '', 'regionId': 0, 'platform': 'Azure', 'systemService': '', 'addressPrefixes': [IPv4Network('20.37.64.0/19')], 'networkFeatures': ['API', 'NSG']}}]}
-IP address 51.4.144.99 belongs to Azure cloud:
+
+IP address 51.4.144.99 belongs to cloud provider Azure:
 	{'changeNumber': 112, 'cloud': 'AzureGermany', 'values': [{'name': 'ServiceFabric', 'id': 'ServiceFabric', 'properties': {'changeNumber': 1, 'region': '', 'regionId': 0, 'platform': 'Azure', 'systemService': 'ServiceFabric', 'addressPrefixes': [IPv4Network('51.4.144.99/32')], 'networkFeatures': ['API', 'NSG', 'UDR', 'FW']}}]}
 	{'changeNumber': 112, 'cloud': 'AzureGermany', 'values': [{'name': 'ServiceFabric.GermanyCentral', 'id': 'ServiceFabric.GermanyCentral', 'properties': {'changeNumber': 1, 'region': 'germanycentral', 'regionId': 5, 'platform': 'Azure', 'systemService': 'ServiceFabric', 'addressPrefixes': [IPv4Network('51.4.144.99/32')], 'networkFeatures': None}}]}
 	{'changeNumber': 112, 'cloud': 'AzureGermany', 'values': [{'name': 'AzureCloud.germanycentral', 'id': 'AzureCloud.germanycentral', 'properties': {'changeNumber': 8, 'region': 'germanycentral', 'regionId': 5, 'platform': 'Azure', 'systemService': '', 'addressPrefixes': [IPv4Network('51.4.128.0/17')], 'networkFeatures': ['API', 'NSG']}}]}
 	{'changeNumber': 112, 'cloud': 'AzureGermany', 'values': [{'name': 'AzureCloud', 'id': 'AzureCloud', 'properties': {'changeNumber': 9, 'region': '', 'regionId': 0, 'platform': 'Azure', 'systemService': '', 'addressPrefixes': [IPv4Network('51.4.128.0/17')], 'networkFeatures': ['API', 'NSG']}}]}
 ```
 
+```
+$ what_cloud 2600:1901::1234 8.8.8.8
+IP address 2600:1901::1234 belongs to cloud provider Google:
+	{'ipv6Prefix': IPv6Network('2600:1901::/48'), 'service': 'Google Cloud', 'scope': 'global'}
+	{'ipv6Prefix': IPv6Network('2600:1900::/28'), 'service': 'Google'}
+
+IP address 8.8.8.8 belongs to cloud provider Google:
+	{'ipv4Prefix': IPv4Network('8.8.8.0/24'), 'service': 'Google'}
+```
+
 ## TODO
 
-* More clouds besides AWS and Azure
+* More clouds
+* Standardize output across clouds?
+* Condense output for IPs that belong to multiple ranges?
 
 ## License
 

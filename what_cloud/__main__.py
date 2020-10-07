@@ -10,6 +10,7 @@ from pprint import pprint
 
 from .aws import AWSCloud
 from .azure import AzureCloud
+from .google import GoogleCloud
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,6 +26,7 @@ def main():
     clouds = dict(
         AWS = AWSCloud(session=session),
         Azure = AzureCloud(session=session),
+        Google = GoogleCloud(session=session),
     )
 
     for ip in args.ip:
@@ -35,13 +37,14 @@ def main():
                 if not matched:
                     matched = True
                 if ii==0:
-                    print("IP address {} belongs to {} cloud:".format(ip, name))
+                    print("IP address {} belongs to cloud provider {}:".format(ip, name))
                 if args.pretty:
                     pprint(match)
                 else:
                     print('\t' + repr(match))
         if not matched:
             print("IP address {} not found in any public cloud range.".format(ip))
+        print()
 
 ########################################
 
