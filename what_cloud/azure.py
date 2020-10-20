@@ -1,4 +1,3 @@
-import os
 import ipaddress
 import json
 import re

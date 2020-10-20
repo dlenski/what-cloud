@@ -6,16 +6,21 @@
 Identifies servers running in various public clouds, based on their providers'
 published IPv4 and IPv6 address ranges. Currently it can recognize…
 
+Cloud service providers:
+
 * AWS
 * Azure
 * Google
 * Oracle
+
+[CDN](https://en.wikipedia.org/wiki/Content_delivery_network)s:
+
 * CloudFlare
 * Fastly
 
 ## Install
 
-Requires Python 3.6+, `pip`, and [`requests`](https://docs.python-requests.org):
+Requires Python 3.6+, `pip`, and [`requests`](https://requests.readthedocs.io):
 
 ```sh
 $ pip3 install https://github.com/dlenski/what-cloud/archive/master.zip

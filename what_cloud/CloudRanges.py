@@ -19,7 +19,7 @@ class CloudRanges:
         return os.path.join(d, fn)
     def load(fp=None):
         pass
-    def save(fp=None):
+    def save(self, fp=None):
         pass
     def check(self, ip):
-        return None
+        pass
