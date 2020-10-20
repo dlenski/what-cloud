@@ -9,6 +9,7 @@ published IPv4 and IPv6 address ranges. Currently it can recognize…
 * AWS
 * Azure
 * Google
+* Oracle
 * CloudFlare
 * Fastly
 
