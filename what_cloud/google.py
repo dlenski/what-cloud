@@ -17,7 +17,7 @@ class GoogleCloud(CloudRanges):
             r = self.session.get(url, stream=True)
             r.raise_for_status()
 
-            c = json.load(r.raw)
+            c = r.json()
             if extra:
                 for p in c['prefixes']:
                     p.update(extra)

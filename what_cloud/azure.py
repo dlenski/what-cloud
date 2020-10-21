@@ -23,9 +23,9 @@ class AzureCloud(CloudRanges):
             assert m is not None
             jurl = m.group();
             self._logger.info('Downloading {} to {} ...'.format(jurl, fp.name))
-            r = self.session.get(jurl, stream=True)
+            r = self.session.get(jurl)
             r.raise_for_status()
-            self._cache.append({'url': jurl, 'contents': json.load(r.raw)})
+            self._cache.append({'url': jurl, 'contents': r.json()})
         json.dump(self._cache, fp)
 
     def load(self, fp=None):

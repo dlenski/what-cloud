@@ -9,7 +9,9 @@ class OracleCloud(CloudRanges):
         self._cache = []
         url = 'https://docs.cloud.oracle.com/en-us/iaas/tools/public_ip_ranges.json'
         self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
-        j = json.load(self.session.get(url, stream=True).raw)
+        r = self.session.get(url)
+        r.raise_for_status()
+        j = r.json()
 
         # Transform from regions { region, cidrs { cidr, tags[] } }
         # to just cidrs { cidr, region, tags[] }
