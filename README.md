@@ -18,6 +18,10 @@ Cloud service providers:
 * CloudFlare
 * Fastly
 
+Others:
+
+* Comcast
+
 ## Install
 
 Requires Python 3.6+, `pip`, and [`requests`](https://requests.readthedocs.io):

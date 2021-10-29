@@ -17,7 +17,7 @@ class CloudRanges:
         d = os.path.join(os.path.expanduser('~'), '.what-cloud-cache')
         os.makedirs(d, exist_ok=True)
         return os.path.join(d, fn)
-    def load(fp=None):
+    def load(self, fp=None):
         pass
     def save(self, fp=None):
         pass
