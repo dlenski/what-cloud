@@ -5,6 +5,7 @@ import argparse
 import ipaddress
 import requests
 import os
+import socket
 from itertools import chain
 from pprint import pprint
 
@@ -12,32 +13,56 @@ from . import all_clouds
 
 logging.basicConfig(level=logging.INFO)
 
+def ipaddress_or_hostname(val):
+    try:
+        return ipaddress.ip_address(val)
+    except ValueError:
+        pass
+
+    ips = []
+    for af in (socket.AF_INET, socket.AF_INET6):
+        try:
+            ips += [ipaddress.ip_address(gai[4][0]) for gai in socket.getaddrinfo(val, None, family=af, proto=socket.IPPROTO_TCP)]
+        except socket.gaierror:
+            pass
+    if ips:
+        return val, ips
+
+    raise argparse.ArgumentTypeError("could not resolve IPv4 or IPv6 address for {!r}".format(val))
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('-v','--verbose', default=0, action='count')
     p.add_argument('-p','--pretty', action='store_true')
-    p.add_argument('ip', type=ipaddress.ip_address, nargs='+', help='IPv4 or IPv6 address')
+    p.add_argument('ip_or_hostname', type=ipaddress_or_hostname, nargs='+', help='IPv4 or IPv6 address, or domain name')
     args = p.parse_args()
 
     session = requests.session()
     clouds = {n:c(session=session) for n,c in all_clouds.items()}
 
-    for ip in args.ip:
-        matched = False
-        for name, cr in clouds.items():
-            matches = cr.check(ip)
-            for ii, match in enumerate(matches):
-                if not matched:
-                    matched = True
-                if ii==0:
-                    print("IP address {} belongs to cloud provider {}:".format(ip, name))
-                if args.pretty:
-                    pprint(match)
-                else:
-                    print('\t' + repr(match))
-        if not matched:
-            print("IP address {} not found in any public cloud range.".format(ip))
-        print()
+    for ip_or_hostname in args.ip_or_hostname:
+        if isinstance(ip_or_hostname, ipaddress._BaseAddress):
+            hostname, ips = None, (ip_or_hostname,)
+        else:
+            hostname, ips = ip_or_hostname
+            print("Hostname {} has {} IP address(es):".format(hostname, len(ips)))
+
+        for ip in ips:
+            matched = False
+            for name, cr in clouds.items():
+                matches = cr.check(ip)
+                for ii, match in enumerate(matches):
+                    if not matched:
+                        matched = True
+                    if ii==0:
+                        print("IP address {} belongs to cloud provider {}:".format(ip, name))
+                    if args.pretty:
+                        pprint(match)
+                    else:
+                        print('\t' + repr(match))
+            if not matched:
+                print("IP address {} not found in any public cloud range.".format(ip))
+            print()
 
 ########################################
 
