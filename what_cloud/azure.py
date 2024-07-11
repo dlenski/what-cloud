@@ -17,11 +17,14 @@ class AzureCloud(CloudRanges):
     def download(self, fp):
         self._cache = []
         for name, num in _subclouds:
-            r = self.session.get('https://www.microsoft.com/en-us/download/confirmation.aspx?id={}'.format(num))
+            r = self.session.get(
+                'https://www.microsoft.com/en-us/download/details.aspx?id={}'.format(num), allow_redirects=True,
+                headers={'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"})
             r.raise_for_status()
             m = re.search(r'https://download.microsoft.com/\S+/ServiceTags_\S+_\d+.json', r.text)
-            assert m is not None
-            jurl = m.group();
+            assert m is not None, \
+                f"Didn't find expected URL (https://download.microsoft.com/*/ServiceTags_ABC_NNN.json) in contents of {r.url}"
+            jurl = m.group()
             self._logger.info('Downloading {} to {} ...'.format(jurl, fp.name))
             r = self.session.get(jurl)
             r.raise_for_status()

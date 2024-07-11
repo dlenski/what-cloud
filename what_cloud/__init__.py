@@ -4,7 +4,6 @@ from .google import GoogleCloud
 from .oracle import OracleCloud
 from .cloudflare import CloudFlare
 from .fastly import Fastly
-from .comcast import Comcast
 
 all_clouds = dict(
     AWS = AWSCloud,
@@ -13,5 +12,4 @@ all_clouds = dict(
     Oracle = OracleCloud,
     CloudFlare = CloudFlare,
     Fastly = Fastly,
-    Comcast = Comcast,
 )

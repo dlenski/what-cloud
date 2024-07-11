@@ -18,10 +18,6 @@ Cloud service providers:
 * CloudFlare
 * Fastly
 
-Others:
-
-* Comcast
-
 ## Install
 
 Requires Python 3.6+, `pip`, and [`requests`](https://requests.readthedocs.io):
@@ -79,6 +75,10 @@ IP address 8.8.8.8 belongs to cloud provider Google:
 * More clouds
 * Standardize output across clouds?
 * Condense output for IPs that belong to multiple ranges?
+
+## Related projects
+
+* https://github.com/vktg/cloudlists (hasn't been updated since 2019)
 
 ## License
 
