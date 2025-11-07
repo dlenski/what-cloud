@@ -21,13 +21,16 @@ unmatched_ips = [ip_address(i) for i in [
 class test_known_ips:
     def setUp(self):
         session = requests.session()
-        self.clouds = {n:c(session=session) for n,c in all_clouds.items()}
+        self.clouds = {n: c(session=session) for n, c in all_clouds.items()}
 
     def check_hits(self, expected_hits, ip):
         hits = 0
         for name, cr in self.clouds.items():
             logging.debug('checking if {} belongs to cloud provider {}'.format(ip, name))
-            hits += bool(cr.check(ip))
+            result = cr.check(ip)
+            if result:
+                logging.debug('  => {}'.format(result))
+                hits += 1
         if hits != expected_hits:
             raise AssertionError("got {} hits for {}, instead of expected {}".format(hits, ip, expected_hits))
 

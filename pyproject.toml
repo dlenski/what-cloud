@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "what-cloud"
+version = "0.1"
+description = "Identify servers running in various clouds"
+authors = ["Daniel Lenski <dlenski@gmail.com>"]
+license = "GPLv3 or later"
+readme = "README.md"
+
+[project.urls]
+Homepage = "https://github.com/dlenski/what-cloud"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = '^2.0.0'
+
+[tool.poetry.dev-dependencies]
+nose2 = '^0.15'
+
+[tool.poetry.scripts]
+yqd = 'yahoo_quote_download.__main__:main'
+what-cloud = 'what_cloud.__main__:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
