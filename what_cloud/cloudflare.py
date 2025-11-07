@@ -8,8 +8,8 @@ class CloudFlare(CloudRanges):
     def download(self, fp):
         self._cache = {}
         for v in ('v4', 'v6'):
-            url = 'https://www.cloudflare.com/ips-{}'.format(v)
-            self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
+            url = f'https://www.cloudflare.com/ips-{v}'
+            self._logger.info(f'Downloading {url} to {fp.name} ...')
             self._cache[v] = self.session.get(url).text.splitlines()
         json.dump(self._cache, fp)
 

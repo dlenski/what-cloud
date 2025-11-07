@@ -8,7 +8,7 @@ class OracleCloud(CloudRanges):
     def download(self, fp):
         self._cache = []
         url = 'https://docs.cloud.oracle.com/en-us/iaas/tools/public_ip_ranges.json'
-        self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
+        self._logger.info(f'Downloading {url} to {fp.name} ...')
         r = self.session.get(url)
         r.raise_for_status()
         j = r.json()

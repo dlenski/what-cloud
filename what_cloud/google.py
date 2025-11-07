@@ -12,8 +12,8 @@ class GoogleCloud(CloudRanges):
     def download(self, fp):
         self._cache = []
         for name, fn, extra in _subclouds:
-            url = 'https://www.gstatic.com/ipranges/{}.json'.format(fn)
-            self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
+            url = f'https://www.gstatic.com/ipranges/{fn}.json'
+            self._logger.info(f'Downloading {url} to {fp.name} ...')
             r = self.session.get(url, stream=True)
             r.raise_for_status()
 

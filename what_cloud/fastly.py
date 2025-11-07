@@ -8,7 +8,7 @@ class Fastly(CloudRanges):
     def download(self, fp):
         self._cache = []
         url = 'https://api.fastly.com/public-ip-list'
-        self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
+        self._logger.info(f'Downloading {url} to {fp.name} ...')
         fp.write(self.session.get(url).text)
 
     def load(self, fp=None):

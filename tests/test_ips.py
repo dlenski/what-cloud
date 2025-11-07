@@ -26,13 +26,13 @@ class test_known_ips:
     def check_hits(self, expected_hits, ip):
         hits = 0
         for name, cr in self.clouds.items():
-            logging.debug('checking if {} belongs to cloud provider {}'.format(ip, name))
+            logging.debug(f'checking if {ip} belongs to cloud provider {name}')
             result = cr.check(ip)
             if result:
-                logging.debug('  => {}'.format(result))
+                logging.debug(f'  => {result}')
                 hits += 1
         if hits != expected_hits:
-            raise AssertionError("got {} hits for {}, instead of expected {}".format(hits, ip, expected_hits))
+            raise AssertionError(f"got {hits} hits for {ip}, instead of expected {expected_hits}")
 
     def test_matched_ips(self):
         for ip in matched_ips:

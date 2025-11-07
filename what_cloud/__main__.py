@@ -28,7 +28,7 @@ def ipaddress_or_hostname(val):
     if ips:
         return val, ips
 
-    raise argparse.ArgumentTypeError("could not resolve IPv4 or IPv6 address for {!r}".format(val))
+    raise argparse.ArgumentTypeError(f"could not resolve IPv4 or IPv6 address for {val!r}")
 
 def main():
     p = argparse.ArgumentParser()
@@ -45,7 +45,7 @@ def main():
             hostname, ips = None, (ip_or_hostname,)
         else:
             hostname, ips = ip_or_hostname
-            print("Hostname {} has {} IP address(es):".format(hostname, len(ips)))
+            print(f"Hostname {hostname} has {len(ips)} IP address(es):")
 
         for ip in ips:
             matched = False
@@ -55,13 +55,13 @@ def main():
                     if not matched:
                         matched = True
                     if ii==0:
-                        print("IP address {} belongs to cloud provider {}:".format(ip, name))
+                        print(f"IP address {ip} belongs to cloud provider {name}:")
                     if args.pretty:
                         pprint(match)
                     else:
                         print('\t' + repr(match))
             if not matched:
-                print("IP address {} not found in any public cloud range.".format(ip))
+                print(f"IP address {ip} not found in any public cloud range.")
             print()
 
 ########################################

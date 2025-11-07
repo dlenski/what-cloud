@@ -7,7 +7,7 @@ from .CloudRanges import CloudRanges
 class AWSCloud(CloudRanges):
     def download(self, fp):
         url = 'https://ip-ranges.amazonaws.com/ip-ranges.json'
-        self._logger.info('Downloading {} to {} ...'.format(url, fp.name))
+        self._logger.info(f'Downloading {url} to {fp.name} ...')
         fp.write(self.session.get(url).text)
 
     def load(self, fp=None):
